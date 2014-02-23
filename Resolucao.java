@@ -7,7 +7,9 @@ jrmo@cin.ufpe.br
 
 public class Resolucao {
 	public static void main (String[] args) {
-		Arquivo arq = new Arquivo("Expressoes.in", "Expressoes.outt");
+		
+		/** classe Arquivo: http://moreno.cin.ufpe.br/~if672cc/shared/Arquivo.java **/
+		Arquivo arq = new Arquivo("Expressoes.in", "Expressoes.out");
 		String exp;
 		int casos = arq.readInt();
 		int numCaso = 1;

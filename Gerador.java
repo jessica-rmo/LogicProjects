@@ -46,7 +46,7 @@ public class Gerador {
 
 					/** identificando as subexpressoes **/
 					for (int j = 0; j < exp.length(); j++) {
-						String s = exp.substring(j, j+1);		//verifica cada caractere da expressao
+						String s = exp.substring(j, j+1);	//verifica cada caractere da expressao
 
 						if (sub.size() == 0) {
 							No no = new No(s);
@@ -102,24 +102,24 @@ public class Gerador {
 					
 					/** gerando tabela verdade das variaveis **/
 					int linhas = calcPotencia(2, varexp); 				//calcula o numero de linhas da tabela verdade das variaveis
-					int hifensvar = (2*varexp)+1;						//quantidade de hifens que serao impressos para as variaveis
+					int hifensvar = (2*varexp)+1;					//quantidade de hifens que serao impressos para as variaveis
 					char tabVar[][] = new char[linhas][varexp];			//instanciando a tabela para as combinacoes das variaveis
 					tabVariaveis(linhas, varexp, tabVar);				//colocando os valores de 0 e 1 na tabela verdade das variaveis
 					
 					/** gerando tabela verdade de subexpressoes **/		//mesma quantidade de linhas da tabela de variaveis
-					int subcolunas = sub.size();						//quantidade de colunas da tabela de subexpressoes
+					int subcolunas = sub.size();				//quantidade de colunas da tabela de subexpressoes
 					char tabExp[][] = new char[linhas][subcolunas];		//instanciando tabela para os valores das subexpressoes
 
-					No arraysub[] = sub.toArray(new No[0]);				//colocando as subexpressoes da lista em um array
+					No arraysub[] = sub.toArray(new No[0]);			//colocando as subexpressoes da lista em um array
 					ordena(arraysub);									//ordenando o array de subexpressoes (algoritmo insertion sort modificado)
 					
-					int hifenssub = hifensSub(arraysub);				//quantidade de hifens que serao impressos para as subexpressoes
+					int hifenssub = hifensSub(arraysub);			//quantidade de hifens que serao impressos para as subexpressoes
 
 					/** colocando subexpressoes em notacao posfixa para poder fazer os calculos **/
 					String arrayposfixa[] = new String[arraysub.length];	//array para subexpessoes posfixadas
 
-					for (int k = 0; k < arrayposfixa.length; k++) {			//pegando cada subexpressao do arraysub...
-						String subpos = posfixa(arraysub[k].exp);			//...transformando em posfixa...
+					for (int k = 0; k < arrayposfixa.length; k++) {		//pegando cada subexpressao do arraysub...
+						String subpos = posfixa(arraysub[k].exp);	//...transformando em posfixa...
 						arrayposfixa[k] = subpos;							//...e colocando no arrayposfixa
 					}
 
@@ -127,7 +127,7 @@ public class Gerador {
 					String valorj[] = new String[1];
 					
 					for (int j = 0; j < linhas; j++) {							//atribuindo as valoracoes as expressoes posfixadas
-						for (int k = 0; k < arrayposfixa.length; k++) {			//para cada subexpressao posfixada
+						for (int k = 0; k < arrayposfixa.length; k++) {		//para cada subexpressao posfixada
 							valorj[0] = arrayposfixa[k];
 							
 							if (arrayposfixa[k].contains("x")) {
@@ -199,7 +199,7 @@ public class Gerador {
 					/** verificando satisfativel/insatisfativel e refutavel/tautologia**/
 					ArrayList<Character> expr = new ArrayList<Character>();		//arraylist que guarda os valores da ultima coluna da tabela de expressoes
 					for (int j = 0; j < linhas; j++) {
-						expr.add(tabExp[j][tabExp[0].length-1]);				//adicionando os valores para verificar
+						expr.add(tabExp[j][tabExp[0].length-1]);		//adicionando os valores para verificar
 					}
 
 					if (expr.contains('1')) {			//verificando para imprimir
@@ -316,7 +316,7 @@ public class Gerador {
 		for (int i = 0; i < a.length; i++) {	//soma do tamanho de cada subexpressao
 			h = h + a[i].exp.length();
 		}
-		h = h + a.length;						//soma com a quantidade de subexpressoes (para os "|")
+		h = h + a.length;			//soma com a quantidade de subexpressoes (para os "|")
 		return h;
 	}
 
@@ -384,10 +384,10 @@ public class Gerador {
 			if (operando(exp.charAt(i))) {
 				resultado.push(exp.charAt(i));			//se for operando (0 ou 1), empilha
 			} else if (exp.charAt(i) == '-') {			//se for operador de negacao...
-				char op = resultado.pop();				//...desempilha o ultimo valor empilhado...
+				char op = resultado.pop();			//...desempilha o ultimo valor empilhado...
 				resultado.push(calcula1(op));			//...calcula com o valor desempilhado e empilha o resultado
 			} else {									//se for outro operador (+, . ou >)
-				char op2 = resultado.pop();				//desempilha os dois ultimos valores empilhados
+				char op2 = resultado.pop();			//desempilha os dois ultimos valores empilhados
 				char op1 = resultado.pop();
 				resultado.push(calcula2(op1, op2, exp.charAt(i)));	//calcula com os valores desempilhados e empilha o resultado
 			}
